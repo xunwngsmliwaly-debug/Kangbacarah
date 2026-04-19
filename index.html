@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>ข้อความกลาง</title>
+    
+
+  </head>
+    
+  <body>
+  <!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ZEGXME VIP</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    margin: 0;
+    background: linear-gradient(135deg, #0f0f0f, #1a0033);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* กล่องหลัก */
+.container {
+    width: 90%;
+    max-width: 420px;
+    padding: 25px;
+    border-radius: 25px;
+    backdrop-filter: blur(20px);
+    background: rgba(255,255,255,0.05);
+    box-shadow: 0 0 40px rgba(168,85,247,0.3);
+    text-align: center;
+}
+
+/* โลโก้ */
+.logo {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    background: linear-gradient(90deg, #c084fc, #f0abfc);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* ปุ่ม */
+.btn {
+    width: 100%;
+    padding: 18px;
+    margin: 12px 0;
+    border-radius: 18px;
+    border: none;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(135deg, #9333ea, #c084fc);
+    box-shadow: 0 5px 20px rgba(168,85,247,0.4);
+    transition: 0.2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(34,197,94,0.9);
+    padding: 14px 24px;
+    border-radius: 14px;
+    display: none;
+    font-weight: bold;
+    box-shadow: 0 0 20px rgba(34,197,94,0.5);
+}
+
+/* footer */
+.footer {
+    margin-top: 15px;
+    font-size: 12px;
+    opacity: 0.6;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="logo">ZEGXME VIP ✨</div>
+
+<button class="btn" onclick="copyText(text1)">✨ เสร็จสิ้นการกลาง</button>
+<button class="btn" onclick="copyText(text2)">📜 เงื่อนไขการโอนเงิน</button>
+<button class="btn" onclick="copyText(text3)">⏱ ระยะเวลากลางโอน</button>
+
+<div class="footer">COPY SYSTEM • PREMIUM MODE</div>
+
+</div>
+
+<div id="toast" class="toast">✔️ คัดลอกสำเร็จ</div>
+
+<script>
+
+const text1 = `♡ ✨ เสร็จสิ้นการกลาง ✨ ♡
+
+┊͙ ขอบคุณทั้ง 2 ฝ่ายที่ไว้วางใจ 🤍
+┊͙ โอกาสหน้าพบกันใหม่ค้าบ
+
+┊͙ ⏰ ร้านเปิด 09:00 - 23:00 น๊าาา`;
+
+const text2 = `      ใช้บริการกลางซีเกมส์💤
+
+กลางจะโอนเงินให้ก็ต่อเมื่อ
+
+🅰️ เงื่อนไขคนเปิดเรท
+┈┈┈┈┈┈┈┈┈┈┈
+• โอนเงินให้กลางก่อนเท่านั้น  
+• เมื่อเสร็จสิ้นรายการ  
+→ กลางจะโอนกลับให้  
+
+⚠️ ชื่อบัญชีต้องตรงกับที่โอนให้กลางเท่านั้น
+
+🅱️ เงื่อนไขลูกค้าจ้างปั่น
+┈┈┈┈┈┈┈┈┈┈┈
+• กรณีเดิมพันเสีย  
+→ กลางจะโอนคืนให้  
+
+📌 ต้องส่งหลักฐานให้ครบ:
+> แคปยอดฝากในเว็บ  
+> แคปหน้าบัญชีในเว็บ  
+
+✔️ เมื่อครบถ้วน  
+→ กลางดำเนินการโอนทันที  
+
+📥 
+กรุณาส่งเลขบัญชีมาด้วยครับ`;
+
+const text3 = `⏱ ระยะเวลาดำเนินการ
+┈┈┈┈┈┈┈┈┈┈┈
+• รอทำรายการไม่เกิน 5 นาที
+หากเกินดันแชทมาได้ใหม่เนื่องจากมีคนใช้บริการจำนวนมากทำให้ตกหล่นครับ`;
+
+function copyText(text) {
+    navigator.clipboard.writeText(text);
+
+    const toast = document.getElementById("toast");
+    toast.style.display = "block";
+
+    setTimeout(() => {
+        toast.style.display = "none";
+    }, 1500);
+}
+
+</script>
+
+</body>
+</html>
+    
+  </body>
+  
+</html>

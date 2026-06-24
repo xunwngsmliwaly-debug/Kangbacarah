@@ -1,196 +1,738 @@
-<!DOCTYPE html>
-<html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>ข้อความกลาง</title>
-    
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
+<!doctype html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ZEGXME VIP</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZEGXME CHECK BILL</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --card: #ffffff;
+      --ink: #101828;
+      --muted: #667085;
+      --line: #e4e7ec;
+      --brand: #0ea5e9;
+      --brand-2: #22c55e;
+      --danger: #ef4444;
+      --soft: #f8fafc;
+      --radius: 20px;
+      --shadow: 0 22px 60px rgba(2, 6, 23, .28);
+    }
 
-<style>
-* {
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+    * { box-sizing: border-box; }
 
-body {
-    margin: 0;
-    background: linear-gradient(135deg, #0f0f0f, #1a0033);
-    color: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
+    body {
+      margin: 0;
+      font-family: "Tahoma", "Noto Sans Thai", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, .30), transparent 36%),
+        radial-gradient(circle at bottom right, rgba(34, 197, 94, .20), transparent 34%),
+        var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 24px;
+    }
 
-/* กล่องหลัก */
-.container {
-    width: 90%;
-    max-width: 420px;
-    padding: 25px;
-    border-radius: 25px;
-    backdrop-filter: blur(20px);
-    background: rgba(255,255,255,0.05);
-    box-shadow: 0 0 40px rgba(168,85,247,0.3);
-    text-align: center;
-}
+    .app {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.35fr 420px;
+      gap: 24px;
+      align-items: start;
+    }
 
-/* โลโก้ */
-.logo {
-    font-size: 26px;
-    font-weight: bold;
-    margin-bottom: 20px;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #c084fc, #f0abfc);
-    -webkit-background-clip: text;
-    color: transparent;
-}
+    .panel {
+      background: rgba(255, 255, 255, .96);
+      border: 1px solid rgba(255, 255, 255, .4);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
 
-/* ปุ่ม */
-.btn {
-    width: 100%;
-    padding: 18px;
-    margin: 12px 0;
-    border-radius: 18px;
-    border: none;
-    font-size: 15px;
-    font-weight: bold;
-    color: #fff;
-    background: linear-gradient(135deg, #9333ea, #c084fc);
-    box-shadow: 0 5px 20px rgba(168,85,247,0.4);
-    transition: 0.2s;
-}
+    .topbar {
+      padding: 24px;
+      background: linear-gradient(135deg, #0f172a 0%, #0b4f6c 50%, #0ea5e9 100%);
+      color: white;
+    }
 
-.btn:hover {
-    transform: translateY(-2px);
-}
+    .topbar h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: .8px;
+      font-weight: 900;
+    }
 
-.btn:active {
-    transform: scale(0.96);
-}
+    .topbar p {
+      margin: 6px 0 0;
+      opacity: .86;
+      font-size: 14px;
+    }
 
-/* Toast */
-.toast {
-    position: fixed;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(34,197,94,0.9);
-    padding: 14px 24px;
-    border-radius: 14px;
-    display: none;
-    font-weight: bold;
-    box-shadow: 0 0 20px rgba(34,197,94,0.5);
-}
+    .content { padding: 22px; }
 
-/* footer */
-.footer {
-    margin-top: 15px;
-    font-size: 12px;
-    opacity: 0.6;
-}
-</style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 800;
+      color: #344054;
+      margin-bottom: 6px;
+    }
+
+    input, select {
+      width: 100%;
+      min-height: 42px;
+      border: 1px solid #d0d5dd;
+      border-radius: 12px;
+      padding: 10px 12px;
+      font-size: 14px;
+      outline: none;
+      background: #fff;
+      transition: .18s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--brand);
+      box-shadow: 0 0 0 4px rgba(14, 165, 233, .14);
+    }
+
+    .span-2 { grid-column: span 2; }
+
+    .btn {
+      border: 0;
+      border-radius: 12px;
+      padding: 12px 14px;
+      min-height: 42px;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .16s ease, opacity .16s ease, box-shadow .16s ease;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: .94;
+    }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--brand), #0369a1);
+      box-shadow: 0 12px 28px rgba(14, 165, 233, .24);
+    }
+
+    .btn-green {
+      color: white;
+      background: linear-gradient(135deg, var(--brand-2), #15803d);
+      box-shadow: 0 12px 28px rgba(34, 197, 94, .22);
+    }
+
+    .btn-dark {
+      color: white;
+      background: #111827;
+    }
+
+    .btn-ghost {
+      color: #111827;
+      background: #eef2f7;
+    }
+
+    .btn-danger {
+      color: white;
+      background: var(--danger);
+    }
+
+    .row-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .table-wrap {
+      margin-top: 20px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      background: white;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--line);
+      vertical-align: middle;
+      font-size: 14px;
+    }
+
+    th {
+      background: #f9fafb;
+      font-size: 12px;
+      color: #475467;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    td.num, th.num { text-align: right; }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .empty {
+      padding: 24px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .settings {
+      margin-top: 20px;
+      padding: 18px;
+      border: 1px dashed #cbd5e1;
+      border-radius: 16px;
+      background: #f8fafc;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      align-items: end;
+    }
+
+    .totals {
+      margin-top: 16px;
+      padding: 18px;
+      border-radius: 16px;
+      background: #0f172a;
+      color: white;
+      display: grid;
+      gap: 10px;
+    }
+
+    .total-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 14px;
+      color: rgba(255,255,255,.84);
+    }
+
+    .grand {
+      border-top: 1px solid rgba(255,255,255,.16);
+      padding-top: 12px;
+      font-size: 24px;
+      font-weight: 1000;
+      color: white;
+    }
+
+    .receipt-shell {
+      padding: 20px;
+      position: sticky;
+      top: 20px;
+    }
+
+    .receipt {
+      width: 80mm;
+      max-width: 100%;
+      margin: 0 auto;
+      background: white;
+      color: #111;
+      border-radius: 14px;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, .18);
+      padding: 16px 14px;
+      font-family: "Tahoma", "Noto Sans Thai", monospace;
+      border: 1px solid #eef2f7;
+    }
+
+    .receipt-head {
+      text-align: center;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed #333;
+    }
+
+    .receipt-head .store {
+      font-size: 19px;
+      font-weight: 1000;
+      letter-spacing: .5px;
+    }
+
+    .receipt-head .sub {
+      margin-top: 3px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .receipt-meta {
+      padding: 10px 0;
+      border-bottom: 1px dashed #333;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .receipt-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      padding: 8px 0;
+      border-bottom: 1px dotted #cbd5e1;
+      font-size: 12px;
+    }
+
+    .item-name {
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .item-detail {
+      color: #555;
+      margin-top: 2px;
+      font-size: 11px;
+    }
+
+    .receipt-total {
+      padding-top: 10px;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .receipt-total .line {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .receipt-total .final {
+      margin-top: 6px;
+      padding-top: 8px;
+      border-top: 1px dashed #333;
+      font-size: 17px;
+      font-weight: 1000;
+    }
+
+    .qr {
+      margin-top: 14px;
+      text-align: center;
+      border-top: 1px dashed #333;
+      padding-top: 12px;
+    }
+
+    .qr img {
+      width: 54mm;
+      max-width: 100%;
+      border-radius: 8px;
+      display: block;
+      margin: 6px auto 0;
+    }
+
+    .thanks {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .hint {
+      margin-top: 12px;
+      color: #475467;
+      font-size: 12px;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      body { padding: 14px; }
+      .app { grid-template-columns: 1fr; }
+      .receipt-shell { position: static; }
+      .grid, .settings { grid-template-columns: 1fr 1fr; }
+      .span-2 { grid-column: span 2; }
+    }
+
+    @media (max-width: 520px) {
+      .grid, .settings { grid-template-columns: 1fr; }
+      .span-2 { grid-column: span 1; }
+      th:nth-child(3), td:nth-child(3) { display: none; }
+      .content { padding: 16px; }
+      .topbar { padding: 20px; }
+    }
+
+    @media print {
+      @page {
+        size: 80mm auto;
+        margin: 0;
+      }
+
+      body {
+        background: #fff;
+        padding: 0;
+      }
+
+      .panel:first-child, .hint, .no-print {
+        display: none !important;
+      }
+
+      .app {
+        display: block;
+        max-width: none;
+      }
+
+      .receipt-shell {
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .panel {
+        box-shadow: none;
+        border: 0;
+        border-radius: 0;
+      }
+
+      .receipt {
+        width: 80mm;
+        max-width: 80mm;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 12px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <main class="app">
+    <section class="panel">
+      <div class="topbar">
+        <h1>ZEGXME CHECK BILL</h1>
+        <p>ระบบชำระเงิน / เพิ่มรายการ / คำนวณส่วนลด / พิมพ์บิลเล็กแบบโปร</p>
+      </div>
 
-<div class="container">
+      <div class="content">
+        <div class="grid">
+          <div class="span-2">
+            <label for="itemName">ชื่อรายการ</label>
+            <input id="itemName" placeholder="เช่น เสื้อ, น้ำ, ค่าบริการ" autocomplete="off" />
+          </div>
+          <div>
+            <label for="qty">จำนวน</label>
+            <input id="qty" type="number" min="1" step="1" value="1" />
+          </div>
+          <div>
+            <label for="price">ราคา / หน่วย</label>
+            <input id="price" type="number" min="0" step="0.01" placeholder="0.00" />
+          </div>
+          <div>
+            <label for="itemDiscount">ลดรายการ</label>
+            <input id="itemDiscount" type="number" min="0" step="0.01" value="0" />
+          </div>
+        </div>
 
-<div class="logo">ZEGXME VIP ✨</div>
+        <div class="row-actions">
+          <button class="btn btn-primary" id="addBtn">+ เพิ่มรายการ</button>
+          <button class="btn btn-ghost" id="sampleBtn">ใส่ตัวอย่าง</button>
+          <button class="btn btn-danger" id="clearBtn">ล้างทั้งหมด</button>
+        </div>
 
-<button class="btn" onclick="copyText(text1)">✨ เสร็จสิ้นการกลาง</button>
-<button class="btn" onclick="copyText(text2)">📜 เงื่อนไขการโอนเงิน</button>
-<button class="btn" onclick="copyText(text3)">⏱ ระยะเวลากลางโอน</button>
-<button class="btn" onclick="copyText(text4)">🩷ให้เครดิตกลาง</button>
-  <button class="btn" onclick="copyText(text5)">🧾 โน๊ตสลิป</button>
-  <button class="btn" onclick="copyText(text6)">💋 รอคิว</button>
-<div class="footer">COPY SYSTEM • PREMIUM MODE</div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>รายการ</th>
+                <th class="num">จำนวน</th>
+                <th class="num">ราคา</th>
+                <th class="num">ส่วนลด</th>
+                <th class="num">รวม</th>
+                <th class="num">ลบ</th>
+              </tr>
+            </thead>
+            <tbody id="itemsBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty">ยังไม่มีรายการ กด “เพิ่มรายการ” เพื่อเริ่มทำบิล</div>
+        </div>
 
-</div>
+        <div class="settings">
+          <div>
+            <label for="billNo">เลขที่บิล</label>
+            <input id="billNo" value="ZEG-001" />
+          </div>
+          <div>
+            <label for="cashier">ผู้รับเงิน</label>
+            <input id="cashier" value="Admin" />
+          </div>
+          <div>
+            <label for="billDiscount">ส่วนลดท้ายบิล</label>
+            <input id="billDiscount" type="number" min="0" step="0.01" value="0" />
+          </div>
+          <div>
+            <label for="discountType">รูปแบบส่วนลด</label>
+            <select id="discountType">
+              <option value="baht">บาท</option>
+              <option value="percent">เปอร์เซ็นต์ (%)</option>
+            </select>
+          </div>
+        </div>
 
-<div id="toast" class="toast">✔️ คัดลอกสำเร็จ</div>
+        <div class="totals">
+          <div class="total-line"><span>ยอดก่อนลด</span><strong id="subtotalText">฿0.00</strong></div>
+          <div class="total-line"><span>ส่วนลดทั้งหมด</span><strong id="discountText">฿0.00</strong></div>
+          <div class="total-line grand"><span>ยอดรวมทั้งสิ้น</span><strong id="grandText">฿0.00</strong></div>
+        </div>
 
-<script>
+        <div class="row-actions">
+          <button class="btn btn-green" id="printBtn">พิมพ์บิล / Save PDF</button>
+          <button class="btn btn-dark" id="newBillBtn">เริ่มบิลใหม่</button>
+        </div>
+      </div>
+    </section>
 
-const text1 = `♡ ✨ เสร็จสิ้นการกลาง ✨ ♡
+    <aside class="panel receipt-shell">
+      <div class="receipt" id="receipt">
+        <div class="receipt-head">
+          <div class="store">ZEGXME CHECK BILL</div>
+          <div class="sub">Small Receipt • Professional Payment</div>
+        </div>
 
-┊͙ ขอบคุณทั้ง 2 ฝ่ายที่ไว้วางใจ 🤍
-┊͙ โอกาสหน้าพบกันใหม่ค้าบ
+        <div class="receipt-meta">
+          <div>เลขที่บิล: <strong id="rBillNo">ZEG-001</strong></div>
+          <div>วันที่: <span id="rDate">-</span></div>
+          <div>ผู้รับเงิน: <span id="rCashier">Admin</span></div>
+        </div>
 
-┊͙ ⏰ ร้านเปิด 09:00 - 23:00 น๊าาา`;
+        <div id="receiptItems"></div>
 
-const text2 = `      ใช้บริการกลางซีเกมส์💤
+        <div class="receipt-total">
+          <div class="line"><span>ยอดก่อนลด</span><strong id="rSubtotal">฿0.00</strong></div>
+          <div class="line"><span>ส่วนลด</span><strong id="rDiscount">฿0.00</strong></div>
+          <div class="line final"><span>รวมทั้งสิ้น</span><strong id="rGrand">฿0.00</strong></div>
+        </div>
 
-กลางจะโอนเงินให้ก็ต่อเมื่อ
+        <div class="qr">
+          <div><strong>สแกนจ่ายเงิน</strong></div>
+          <img src="https://m1r.ai/wnfr.jpg" alt="Thai QR Payment สำหรับ ZEGXME" crossorigin="anonymous" />
+        </div>
 
-🅰️ เงื่อนไขคนเปิดเรท
-┈┈┈┈┈┈┈┈┈┈┈
-• โอนเงินให้กลางก่อนเท่านั้น  
-• เมื่อเสร็จสิ้นรายการ  
-→ กลางจะโอนกลับให้  
+        <div class="thanks">ขอบคุณที่ใช้บริการ</div>
+      </div>
 
-⚠️ ชื่อบัญชีต้องตรงกับที่โอนให้กลางเท่านั้น
+      <div class="hint no-print">............</div>
+    </aside>
+  </main>
 
-🅱️ เงื่อนไขลูกค้าจ้างปั่น
-┈┈┈┈┈┈┈┈┈┈┈
-• กรณีเดิมพันเสีย  
-→ กลางจะโอนคืนให้  
+  <script>
+    const state = {
+      items: []
+    };
 
-📌 ต้องส่งหลักฐานให้ครบ:
-> แคปยอดฝากในเว็บ  
-> แคปหน้าบัญชีในเว็บ  
+    const $ = (id) => document.getElementById(id);
 
-✔️ เมื่อครบถ้วน  
-→ กลางดำเนินการโอนทันที  
+    const money = (n) => {
+      const safe = Number.isFinite(Number(n)) ? Number(n) : 0;
+      return new Intl.NumberFormat('th-TH', {
+        style: 'currency',
+        currency: 'THB',
+        minimumFractionDigits: 2
+      }).format(safe);
+    };
 
-📥 
-กรุณาส่งเลขบัญชีมาด้วยครับ`;
+    const numberValue = (id) => {
+      const value = parseFloat($(id).value);
+      return Number.isFinite(value) ? value : 0;
+    };
 
-const text3 = `⏱ ระยะเวลาดำเนินการ
-┈┈┈┈┈┈┈┈┈┈┈
-• รอทำรายการไม่เกิน 5 นาที
-หากเกินดันแชทมาได้ใหม่เนื่องจากมีคนใช้บริการจำนวนมากทำให้ตกหล่นครับ`;
-const text4 = `
-┊͙ ˘͈ᵕ˘͈  CREDIT ZEGXME  ♡
-┊͙ ✔️ บริการดี      +1
-┊͙ ✖️ บริการไม่ดี   -1
+    const lineTotal = (item) => {
+      const gross = item.qty * item.price;
+      return Math.max(0, gross - item.discount);
+    };
 
-⌗ ลิงก์ : https://url.in.th/zZtZU
->หรือโพสต์ปักหมุดเค้านะค้าบ
+    const getTotals = () => {
+      const subtotalBeforeItemDiscount = state.items.reduce((sum, item) => sum + (item.qty * item.price), 0);
+      const itemDiscount = state.items.reduce((sum, item) => sum + Math.min(item.discount, item.qty * item.price), 0);
+      const afterItemDiscount = Math.max(0, subtotalBeforeItemDiscount - itemDiscount);
+      const billDiscountInput = Math.max(0, numberValue('billDiscount'));
+      const billDiscount = $('discountType').value === 'percent'
+        ? afterItemDiscount * Math.min(billDiscountInput, 100) / 100
+        : Math.min(billDiscountInput, afterItemDiscount);
+      const grand = Math.max(0, afterItemDiscount - billDiscount);
 
-รบกวนให้เครดิตด้วยน้าค้าบ 🩷`;
+      return {
+        subtotal: subtotalBeforeItemDiscount,
+        discount: itemDiscount + billDiscount,
+        grand
+      };
+    };
 
-  const text5 = 
-    'ใช้บริการกลางกับซีเกมส์เงินที่โอนให้ได้มาโดยบริสุทธิ์';
+    const nowText = () => {
+      const now = new Date();
+      return now.toLocaleString('th-TH', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    };
 
-  const text6 =
-    '⏳ มีผู้ใช้บริการจำนวนมาก โปรดรอคิวตามลำดับ  ขออภัยในความล่าช้า 🙇🏻‍♂️';
-  
-function copyText(text) {
-    navigator.clipboard.writeText(text);
+    const renderItems = () => {
+      const body = $('itemsBody');
+      body.innerHTML = '';
 
-    const toast = document.getElementById("toast");
-    toast.style.display = "block";
+      state.items.forEach((item, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${escapeHtml(item.name)}</td>
+          <td class="num">${item.qty}</td>
+          <td class="num">${money(item.price)}</td>
+          <td class="num">${money(item.discount)}</td>
+          <td class="num"><strong>${money(lineTotal(item))}</strong></td>
+          <td class="num"><button class="btn btn-danger" style="padding:8px 10px; min-height:auto;" data-delete="${index}">ลบ</button></td>
+        `;
+        body.appendChild(tr);
+      });
 
-    setTimeout(() => {
-        toast.style.display = "none";
-    }, 1500);
-}
+      $('emptyState').style.display = state.items.length ? 'none' : 'block';
 
-</script>
+      document.querySelectorAll('[data-delete]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const index = Number(btn.dataset.delete);
+          state.items.splice(index, 1);
+          render();
+        });
+      });
+    };
 
+    const renderReceipt = () => {
+      const box = $('receiptItems');
+      box.innerHTML = '';
+
+      if (!state.items.length) {
+        const div = document.createElement('div');
+        div.className = 'receipt-row';
+        div.innerHTML = `<div><span class="item-name">ยังไม่มีรายการ</span></div><strong>${money(0)}</strong>`;
+        box.appendChild(div);
+      } else {
+        state.items.forEach((item) => {
+          const div = document.createElement('div');
+          div.className = 'receipt-row';
+          div.innerHTML = `
+            <div>
+              <div class="item-name">${escapeHtml(item.name)}</div>
+              <div class="item-detail">${item.qty} x ${money(item.price)}${item.discount > 0 ? ' • ลด ' + money(item.discount) : ''}</div>
+            </div>
+            <strong>${money(lineTotal(item))}</strong>
+          `;
+          box.appendChild(div);
+        });
+      }
+
+      const totals = getTotals();
+      $('rBillNo').textContent = $('billNo').value || '-';
+      $('rCashier').textContent = $('cashier').value || '-';
+      $('rDate').textContent = nowText();
+      $('rSubtotal').textContent = money(totals.subtotal);
+      $('rDiscount').textContent = money(totals.discount);
+      $('rGrand').textContent = money(totals.grand);
+    };
+
+    const renderTotals = () => {
+      const totals = getTotals();
+      $('subtotalText').textContent = money(totals.subtotal);
+      $('discountText').textContent = money(totals.discount);
+      $('grandText').textContent = money(totals.grand);
+    };
+
+    const render = () => {
+      renderItems();
+      renderTotals();
+      renderReceipt();
+    };
+
+    const addItem = () => {
+      const name = $('itemName').value.trim();
+      const qty = Math.max(1, Math.round(numberValue('qty')));
+      const price = Math.max(0, numberValue('price'));
+      const discount = Math.max(0, numberValue('itemDiscount'));
+
+      if (!name) {
+        $('itemName').focus();
+        return;
+      }
+
+      if (price <= 0) {
+        $('price').focus();
+        return;
+      }
+
+      state.items.push({
+        name,
+        qty,
+        price,
+        discount: Math.min(discount, qty * price)
+      });
+
+      $('itemName').value = '';
+      $('qty').value = '1';
+      $('price').value = '';
+      $('itemDiscount').value = '0';
+      $('itemName').focus();
+      render();
+    };
+
+    const resetBill = () => {
+      state.items = [];
+      $('billNo').value = 'ZEG-' + String(Math.floor(Math.random() * 900 + 100));
+      $('cashier').value = 'Admin';
+      $('billDiscount').value = '0';
+      $('discountType').value = 'baht';
+      render();
+    };
+
+    const escapeHtml = (text) => {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    };
+
+    $('addBtn').addEventListener('click', addItem);
+    $('itemName').addEventListener('keydown', (e) => { if (e.key === 'Enter') addItem(); });
+    $('qty').addEventListener('keydown', (e) => { if (e.key === 'Enter') addItem(); });
+    $('price').addEventListener('keydown', (e) => { if (e.key === 'Enter') addItem(); });
+    $('itemDiscount').addEventListener('keydown', (e) => { if (e.key === 'Enter') addItem(); });
+
+    ['billNo', 'cashier', 'billDiscount', 'discountType'].forEach((id) => {
+      $(id).addEventListener('input', render);
+      $(id).addEventListener('change', render);
+    });
+
+    $('printBtn').addEventListener('click', () => {
+      renderReceipt();
+      window.print();
+    });
+
+    $('clearBtn').addEventListener('click', () => {
+      state.items = [];
+      render();
+    });
+
+    $('newBillBtn').addEventListener('click', resetBill);
+
+    $('sampleBtn').addEventListener('click', () => {
+      state.items = [
+        { name: 'สินค้า Premium', qty: 1, price: 299, discount: 0 },
+        { name: 'ค่าบริการ', qty: 1, price: 50, discount: 10 }
+      ];
+      $('billDiscount').value = '5';
+      $('discountType').value = 'percent';
+      render();
+    });
+
+    render();
+  </script>
 </body>
-</html>
-    
-  </body>
-  
 </html>

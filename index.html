@@ -464,7 +464,7 @@
           </div>
           <div>
             <label for="cashier">ผู้รับเงิน</label>
-            <input id="cashier" value="Admin" />
+            <input id="cashier" value="zegxme" />
           </div>
           <div>
             <label for="billDiscount">ส่วนลดท้ายบิล</label>
@@ -514,7 +514,7 @@
         </div>
 
         <div class="qr">
-          <div><strong>กรุณาเเสกนชำระเงินที่คิวอาร์ด้านล่างนี้เท่านั้นครับ</strong></div>
+          <div><strong>เเสกนชำระเงินที่คิวอาร์ด้านล่างนี้เท่านั้นครับ</strong></div>
           <img src="https://m1r.ai/vivJ.png" alt="Thai QR Payment สำหรับ ZEGXME" crossorigin="anonymous" />
         </div>
 
@@ -687,7 +687,7 @@
     const resetBill = () => {
       state.items = [];
       $('billNo').value = 'ZEG-' + String(Math.floor(Math.random() * 900 + 100));
-      $('cashier').value = 'Admin';
+      $('cashier').value = 'zegxme';
       $('billDiscount').value = '0';
       $('discountType').value = 'baht';
       render();
@@ -724,10 +724,10 @@
 
     $('sampleBtn').addEventListener('click', () => {
       state.items = [
-        { name: 'สินค้า Premium', qty: 1, price: 299, discount: 0 },
-        { name: 'ค่าบริการ', qty: 1, price: 50, discount: 10 }
+        { name: 'เว็บรายเดือน', qty: 1, price: 650, discount: 0 },
+        { name: 'ค่าบริการเช็คสลิป', qty: 1, price: 9, discount: 0 }
       ];
-      $('billDiscount').value = '5';
+      $('billDiscount').value = '0';
       $('discountType').value = 'percent';
       render();
     });
